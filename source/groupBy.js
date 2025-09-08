@@ -29,6 +29,12 @@
 
 // Функция для группировки объектов по ключу
 function groupBy(array, key) {
+    if (!Array.isArray(array)) {
+        throw new TypeError('Первый аргумент должен быть массивом');
+    }
+    if (typeof key !== 'string') {
+        throw new TypeError('Второй аргумент должен быть строкой');
+    }
     const result = {};
     for (let i = 0; i < array.length; i++) {
         const item = array[i];  // текущий объект

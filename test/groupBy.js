@@ -101,5 +101,16 @@ QUnit.module('Тестируем функцию groupBy', () => {
             unique: [{ id: 1, type: 'unique', name: 'onlyOne' }]
         }, 'Одиночный элемент корректно попадает в свою группу');
     });
+
+    QUnit.test('Ошибка, если первый аргумент не массив', (assert) => {
+        assert.throws(() => groupBy(null, 'category'), TypeError, 'null вместо массива -> TypeError');
+        assert.throws(() => groupBy({}, 'category'), TypeError, 'Объект вместо массива -> TypeError');
+    });
+
+    QUnit.test('Ошибка, если второй аргумент не строка', (assert) => {
+        assert.throws(() => groupBy([{ id: 1 }], 123), TypeError, 'Число вместо строки -> TypeError');
+        assert.throws(() => groupBy([{ id: 1 }], null), TypeError, 'null вместо строки -> TypeError');
+    });
+
 });
 
