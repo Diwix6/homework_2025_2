@@ -26,8 +26,6 @@
  * //   ]
  * // }
 */
-
-// Функция для группировки объектов по ключу
 function groupBy(array, key) {
     if (!Array.isArray(array)) {
         throw new TypeError('Первый аргумент должен быть массивом');
