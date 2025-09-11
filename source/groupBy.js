@@ -30,21 +30,15 @@ const groupBy = (array, key) => {
     if (!Array.isArray(array)) {
         throw new TypeError('Первый аргумент должен быть массивом');
     }
-    if (typeof key !== 'string') {
+    if (typeof key !== 'string' && !(key instanceof String)) {
         throw new TypeError('Второй аргумент должен быть строкой');
     }
-    const result = {};
-    for (let i = 0; i < array.length; i++) {
-        const item = array[i];  // текущий объект
-        const groupKey = item[key]; // значение по ключу
-
-        // Если такой группы ещё нет в результате, создаём её
+    return array.reduce((result, item) => {
+        const groupKey = item[key];
         if (!result[groupKey]) {
             result[groupKey] = [];
         }
-
-        // Добавляем объект в нужную группу
         result[groupKey].push(item);
-    }
-    return result;
+        return result;
+    }, {});
 }

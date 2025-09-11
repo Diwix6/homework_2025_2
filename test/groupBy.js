@@ -112,5 +112,23 @@ QUnit.module('Тестируем функцию groupBy', () => {
         assert.throws(() => groupBy([{ id: 1 }], null), TypeError, 'null вместо строки -> TypeError');
     });
 
+    QUnit.test('Работает с new String() вместо обычной строки', (assert) => {
+        const data = [
+            { id: 1, category: 'fruit' },
+            { id: 2, category: 'vegetable' },
+            { id: 3, category: 'fruit' }
+        ];
+
+        const result = groupBy(data, new String('category'));
+        assert.deepEqual(result, {
+            fruit: [
+                { id: 1, category: 'fruit' },
+                { id: 3, category: 'fruit' }
+            ],
+            vegetable: [
+                { id: 2, category: 'vegetable' }
+            ]
+        }, 'Должно работать так же, как с обычной строкой');
+    });
 });
 
